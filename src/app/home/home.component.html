@@ -1,0 +1,110 @@
+<button class="btn btn-secondary" routerLink="/adduser">Add User</button>
+<br /><br />
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>EMPLOYEEID</th>
+        <th>NAME</th>
+        <th>EMPCODE</th>
+        <th>SALARY</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of employeesArray">
+        <td>{{ data.EmpID }}</td>
+        <td>{{ data.Name }}</td>
+        <td>{{ data.EmpCode }}</td>
+        <td>{{ data.Salary }}</td>
+        <td>
+          <button (click)="loadEmployeeToEdit(data.EmpID)" class="btn btn-info">
+            Edit
+          </button>
+        </td>
+        <td>
+          <button (click)="delete(data.EmpID)" class="btn btn-danger">
+            Delete
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </td>
+        <td>
+          <button [routerLink]="['/adduser', data.EmpID]" class="btn btn-info">
+            EditToPage
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br />
+
+<div *ngIf="bookName" [ngClass]="'success'">{{ bookName }} Added.</div>
+<div *ngIf="errorMessage" [ngClass]="'error'">{{ errorMessage }}</div>
+
+<br />
+<div>
+  <!-- <form [formGroup]="employeeForm" (ngSubmit)="onEmployeeFormSubmit()">
+    <table>
+      <tr>
+        <td>EmpID</td>
+        <td>
+          <input formControlName="empid" [(ngModel)]="employee.EmpID" />
+          <label
+            *ngIf="employeeForm.get('empid').invalid && processValidation"
+            [ngClass]="'error'"
+          >
+            Title is required.
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Enter Name</td>
+        <td>
+          <input formControlName="name" [(ngModel)]="employee.Name" />
+          <label
+            *ngIf="employeeForm.get('name').invalid && processValidation"
+            [ngClass]="'error'"
+          >
+            Title is required.
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Enter EmpCode</td>
+        <td>
+          <input formControlName="empcode" [(ngModel)]="employee.EmpCode" />
+          <label
+            *ngIf="employeeForm.get('empcode').invalid && processValidation"
+            [ngClass]="'error'"
+          >
+            Title is required.
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Enter Salary</td>
+        <td>
+          <input formControlName="salary" [(ngModel)]="employee.Salary" />
+          <label
+            *ngIf="employeeForm.get('salary').invalid && processValidation"
+            [ngClass]="'error'"
+          >
+            Title is required.
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button *ngIf="employeeIdToUpdate" (click)="update()">UPDATE</button>
+        </td>
+        <td><button (click)="add()">ADD</button></td>
+        <td><button (click)="fetchEmployees()">Get</button></td>
+      </tr>
+    </table>
+  </form> -->
+</div>
+
+<!-- *ngFor="let data of (employeesArray | async)" , use this when using
+the fetchEmployees in the constuctor, coz its passing in the this.employees -->

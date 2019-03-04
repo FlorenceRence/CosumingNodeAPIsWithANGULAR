@@ -1,0 +1,61 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onEmployeeFormSubmit()">
+  <table>
+    <tr>
+      <td>EmpID</td>
+      <td>
+        <input formControlName="empid" [(ngModel)]="employee.EmpID" />
+      </td>
+    </tr>
+    <tr>
+      <td>Enter Name</td>
+      <td>
+        <input formControlName="name" [(ngModel)]="employee.Name" />
+        <label
+          *ngIf="employeeForm.get('name').invalid && processValidation"
+          [ngClass]="'error'"
+        >
+          Name is required.
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>Enter EmpCode</td>
+      <td>
+        <input formControlName="empcode" [(ngModel)]="employee.EmpCode" />
+      </td>
+    </tr>
+    <tr>
+      <td>Enter Salary</td>
+      <td>
+        <input formControlName="salary" [(ngModel)]="employee.Salary" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button
+          *ngIf="employeeIdToUpdate; else saveButtonShow"
+          (click)="update()"
+          class="btn btn-primary"
+        >
+          UPDATE
+        </button>
+        <ng-template #saveButtonShow>
+          <button (click)="add()" class="btn btn-primary">
+            ADD
+          </button></ng-template
+        >
+      </td>
+      <td>
+        <button (click)="goBack()" class="btn btn-secondary">
+          BACK
+        </button>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- 
+<br />
+<h1>Employee # {{ employeePass.EmpID }}</h1>
+<p>Name: {{ employeePass.Name }}</p>
+<p>EmpCode: {{ employeePass.EmpCode }}</p>
+<p>Salary:{{ employeePass.Salary }}</p> -->
